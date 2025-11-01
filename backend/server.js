@@ -11,11 +11,20 @@ const app = express();
 // Middleware
 app.use(logger);
 app.use(rateLimit);
+const allowedOrigins = [
+    'http://localhost:5173', // Local dev
+    'https://my-mgnrega-git-main-hari-hara-budras-projects.vercel.app' // Your Vercel URL
+];
+
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type']
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ limit: '10kb' })); // Limit body size
