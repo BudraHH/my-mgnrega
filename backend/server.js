@@ -13,7 +13,7 @@ app.use(logger);
 app.use(rateLimit);
 const allowedOrigins = [
     'http://localhost:5173', // Local dev
-    'https://my-mgnrega-git-main-hari-hara-budras-projects.vercel.app' // Your Vercel URL
+    'https://my-mgnrega-b2a3gutkr-hari-hara-budras-projects.vercel.app/'// Your Vercel URL
 ];
 
 app.use(cors({
